@@ -1,7 +1,6 @@
 require('dotenv').config()
-const sequelize = require('./sequilize.js');
 const Blog = require('./models/Blog.js')
-
+const sequelize = require('./sequilize.js')
 
 const main = async () => {
   try {
