@@ -20,6 +20,20 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.put('/:id', blogMiddleware, async (req, res) => {
+  try {
+    if (req.blog) {
+      req.blog.likes = req.body.likes
+      await req.blog.save()
+      res.json(req.blog.likes)
+    } else {
+      res.status(404).end()
+    }
+  } catch (error) {
+    res.status(400).json({ error })
+  }
+})
+
 router.delete('/:id', blogMiddleware, async (req, res) => {
   try {
     if (req.blog) {
