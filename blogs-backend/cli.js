@@ -6,7 +6,6 @@ const main = async () => {
   try {
     await sequelize.authenticate()
     console.log('Connection has been established successfully.')
-    await Blog.sync();
     const blogs = await Blog.findAll()
     blogs.forEach(({dataValues: { author, title, likes }}) => console.log(`${author}: '${title}', ${likes} likes`))
     sequelize.close()
