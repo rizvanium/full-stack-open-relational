@@ -25,7 +25,7 @@ router.put('/:id', blogMiddleware, async (req, res) => {
     if (req.blog) {
       req.blog.likes = req.body.likes
       await req.blog.save()
-      res.json(req.blog.likes)
+      res.json({ likes: req.blog.likes })
     } else {
       res.status(404).end()
     }
