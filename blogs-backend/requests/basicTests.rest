@@ -5,9 +5,8 @@ POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
 {
-  "author":"Rizvan",
-  "url":"rizvan.io",
-  "title":"Blog addition test"
+  "title": "Testing things",
+  "author":"Rizvan"
 }
 
 ###
@@ -15,7 +14,7 @@ PUT http://localhost:3001/api/blogs/7
 Content-Type: application/json
 
 {
-  "likes": 10
+  "likess": 10
 }
 
 ###
