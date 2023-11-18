@@ -1,8 +1,10 @@
-const { PORT } = require('./util/config.js');
+const { PORT } = require('./util/config');
 const express = require('express')
 require('express-async-errors')
 const { connectToDatabase } = require('./util/db')
 const blogsRouter = require('./controllers/blogs')
+const usersRouter = require('./controllers/users')
+const loginRouter = require('./controllers/login')
 const app = express()
 
 const errorHandler = (error, request, response, next) => {
@@ -21,6 +23,8 @@ const errorHandler = (error, request, response, next) => {
 
 app.use(express.json())
 app.use('/api/blogs', blogsRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
 app.use(errorHandler)
 
 const start = async () => {

@@ -1,18 +1,39 @@
+const { SECRET } = require('../util/config')
 const router = require('express').Router()
-const { Blog } = require('../models')
+const { Blog, User } = require('../models')
+const jwt = require('jsonwebtoken')
 
 const blogMiddleware = async (req, res, next) => {
   req.blog = await Blog.findByPk(req.params.id)
   next()
 }
 
+const tokenExtractor = (req, res, next) => {
+  const authorization = req.get('authorization')
+  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    try {
+      req.decodedToken = jwt.verify(authorization.substring(7), SECRET)
+    } catch{
+      return res.status(401).json({ error: 'token invalid' })
+    }
+  }  else {
+    return res.status(401).json({ error: 'token missing' })
+  }
+  next()
+}
+
 router.get('/', async (req, res) => {
-  const blogs = await Blog.findAll()
+  const blogs = await Blog.findAll({
+    include: {
+      model: User,
+    }
+  })
   res.json(blogs)
 })
 
-router.post('/', async (req, res) => {
-  const blog = await Blog.create(req.body)
+router.post('/', tokenExtractor, async (req, res) => {
+  const user = await User.findByPk(req.decodedToken.id)
+  const blog = await Blog.create({ ...req.body, userId: user.id, date: new Date() })
   res.json(blog)
 })
 
@@ -26,12 +47,16 @@ router.put('/:id', blogMiddleware, async (req, res) => {
   }
 })
 
-router.delete('/:id', blogMiddleware, async (req, res) => {
-  if (req.blog) {
-    await req.blog.destroy()
-    res.status(204).end()
+router.delete('/:id', tokenExtractor, blogMiddleware, async (req, res) => {
+  if (req.decodedToken.id !== req.blog.userId) {
+    return res.status(401).json({ error: 'not your blog' })
   } else {
-    res.status(404).end()
+    if (req.blog) {
+      await req.blog.destroy()
+      res.status(204).end()
+    } else {
+      res.status(404).end()
+    }
   }
 })
 
