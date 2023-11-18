@@ -1,4 +1,4 @@
-GET http://localhost:3001/api/blogs?search=Yo
+GET http://localhost:3001/api/blogs
 
 ###
 POST http://localhost:3001/api/blogs
@@ -6,9 +6,10 @@ Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBlZGFAbWFpbC5jb20iLCJpZCI6MTAsImlhdCI6MTcwMDMwNTgxOX0.Au22eR0FQvO88xqSGjhX4ninV5EI70_D1AuIOs8l8KQ
 
 {
-  "title": "Belongs to peda@mail.com",
+  "title": "Rasta",
   "url": "rizvan.io",
-  "author":"Yoyoyyo"
+  "author":"Snoop Dogg",
+  "likes": 850
 }
 
 ###
