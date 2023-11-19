@@ -44,6 +44,6 @@ POST http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-  "username": "rizvan@mail.com",
+  "username": "chalil@mail.com",
   "password": "secret"
 }
