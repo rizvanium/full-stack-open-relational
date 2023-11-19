@@ -1,15 +1,18 @@
 GET http://localhost:3001/api/blogs
 
 ###
+GET http://localhost:3001/api/authors
+
+###
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBlZGFAbWFpbC5jb20iLCJpZCI6MTAsImlhdCI6MTcwMDMwNTgxOX0.Au22eR0FQvO88xqSGjhX4ninV5EI70_D1AuIOs8l8KQ
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJpenZhbkBtYWlsLmNvbSIsImlkIjoxLCJpYXQiOjE3MDA0MDM0ODZ9.a2S2n6L7VV3gPzedgztg4NYoQG_3Wz_PF2OZAiW6uXM
 
 {
-  "title": "Rasta",
+  "title": "sadasdxczxcv",
   "url": "rizvan.io",
-  "author":"Snoop Dogg",
-  "likes": 850
+  "author":"Rizvan",
+  "likes": 100
 }
 
 ###
@@ -32,8 +35,8 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-  "name": "Klai",
-  "username": "peda@mail.com"
+  "name": "Chalilovas",
+  "username": "chalil@mail.com"
 }
 
 ###
@@ -41,6 +44,6 @@ POST http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-  "username": "peda@mail.com",
+  "username": "rizvan@mail.com",
   "password": "secret"
 }
