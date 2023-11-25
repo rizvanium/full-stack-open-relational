@@ -1,5 +1,7 @@
 const { Model, DataTypes } = require('sequelize')
 const { sequelize } = require('../util/db')
+const Blog = require('./blog.js')
+const User = require('./user.js')
 
 class ReadingList extends Model {}
 
@@ -26,9 +28,10 @@ ReadingList.init({
   },
   {
     sequelize, 
-    underscored: true, 
-    timestamps: false, 
-    modelName: 'reading_list'
+    underscored: true,
+    timestamps: false,
+    tableName: 'reading_list',
+    modelName: 'readingList',
 });
 
 module.exports = ReadingList;

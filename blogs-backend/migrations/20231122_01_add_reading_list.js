@@ -18,6 +18,10 @@ module.exports = {
         allowNull: false,
         references: { model: 'blogs', key: 'id' },
       },
+      is_read: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+      }
     })
   },
   down: async ({ context: queryInterface }) => {
