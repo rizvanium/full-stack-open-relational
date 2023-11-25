@@ -9,7 +9,7 @@ Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJpenZhbkBtYWlsLmNvbSIsImlkIjoxLCJpYXQiOjE3MDA5MDQ0NzZ9.XzhO730ULwqpYcVrKyfX0rpRhQhmt7FgjrYzBSH3H5c
 
 {
-  "title": "sadasdxczxcv",
+  "title": "Cool Stuff",
   "url": "rizvan.io",
   "author":"Rizvan",
   "likes": 100,
@@ -57,7 +57,16 @@ Content-Type: application/json
 
 {
   "userId": 1,
-  "blogId": 1
+  "blogId": 2
+}
+
+###
+PUT http://localhost:3001/api/readinglists/6
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJpenZhbkBtYWlsLmNvbSIsImlkIjoxLCJpYXQiOjE3MDA5MjUyNzZ9.tt223vlTQjnu259pALMpPuM04OmihCiFsQsoN-Kqx5o
+
+{
+  "read": true
 }
 
 ###

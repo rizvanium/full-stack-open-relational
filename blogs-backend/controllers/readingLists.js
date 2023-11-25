@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const { ReadingLists, Blog, User } = require('../models')
+const { tokenExtractor } = require('../util/middleware')
 
 router.get('/', async(req, res) => {
   const readingList = await ReadingLists.findAll()
@@ -21,6 +22,18 @@ router.post('/', async (req, res) => {
     isRead: false,
   })
 
+  res.json(readingList)
+})
+
+router.put('/:id', tokenExtractor, async (req, res) => {
+  const readingList = await ReadingLists.findByPk(req.params.id)
+  if (req.decodedToken.id !== readingList.userId) {
+    return res.status(401).json({ error: 'not your reading list' })
+  } else {
+    readingList.isRead = req.body.read
+    await readingList.save()
+  }
+  
   res.json(readingList)
 })
 
