@@ -73,4 +73,7 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJpe
 GET http://localhost:3001/api/readinglists
 
 ###
+GET http://localhost:3001/api/users/1?read=true
+
+###
 GET http://localhost:3001/api/users/1
