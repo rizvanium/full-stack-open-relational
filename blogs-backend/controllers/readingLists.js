@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', tokenExtractor, async (req, res) => {
   const readingList = await ReadingLists.findByPk(req.params.id)
-  if (req.decodedToken.id !== readingList.userId) {
+  if (req.loggedInUser.id !== readingList.userId) {
     return res.status(401).json({ error: 'not your reading list' })
   } else {
     readingList.isRead = req.body.read

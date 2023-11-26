@@ -29,6 +29,11 @@ router.post('/', async (request, response) => {
 
   const token = jwt.sign({}, SECRET)
 
+  await Session.create({
+    userId: user.id,
+    token,
+  })
+
   response
     .status(200)
     .send({ token, username: user.username, name: user.name })

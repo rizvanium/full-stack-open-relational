@@ -43,8 +43,12 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', tokenExtractor, async (req, res) => {
-  const user = await User.findByPk(req.decodedToken.id)
-  const blog = await Blog.create({ ...req.body, userId: user.id, date: new Date() })
+  const blog = await Blog.create({
+    ...req.body,
+    userId: req.loggedInUser.id,
+    date: new Date()
+  })
+
   res.json(blog)
 })
 
@@ -59,7 +63,7 @@ router.put('/:id', blogMiddleware, async (req, res) => {
 })
 
 router.delete('/:id', tokenExtractor, blogMiddleware, async (req, res) => {
-  if (req.decodedToken.id !== req.blog.userId) {
+  if (req.loggedInUser.id !== req.blog.userId) {
     return res.status(401).json({ error: 'not your blog' })
   } else {
     if (req.blog) {
