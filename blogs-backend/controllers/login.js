@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const router = require('express').Router()
 
 const { SECRET } = require('../util/config')
-const User = require('../models/user')
+const { Session, User } = require('../models')
 
 router.post('/', async (request, response) => {
   const body = request.body
@@ -20,13 +20,14 @@ router.post('/', async (request, response) => {
       error: 'invalid username or password'
     })
   }
-
-  const userForToken = {
-    username: user.username,
-    id: user.id,
+  
+  if (user.disabled) {
+    return response.status(401).json({
+      error: 'you\'ve been banned'
+    })
   }
 
-  const token = jwt.sign(userForToken, SECRET)
+  const token = jwt.sign({}, SECRET)
 
   response
     .status(200)
