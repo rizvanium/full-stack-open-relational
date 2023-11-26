@@ -1,6 +1,6 @@
 const { Op } = require('sequelize')
 const router = require('express').Router()
-const { Blog, User } = require('../models')
+const { Blog, User, ReadingLists } = require('../models')
 const { tokenExtractor } = require('../util/middleware')
 
 const blogMiddleware = async (req, res, next) => {
@@ -67,7 +67,13 @@ router.delete('/:id', tokenExtractor, blogMiddleware, async (req, res) => {
     return res.status(401).json({ error: 'not your blog' })
   } else {
     if (req.blog) {
+      await ReadingLists.destroy({
+        where: {
+          blogId: req.blog.id,
+        }
+      })/
       await req.blog.destroy()
+      
       res.status(204).end()
     } else {
       res.status(404).end()
